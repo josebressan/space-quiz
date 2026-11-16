@@ -1,0 +1,38 @@
+@model space_quiz.Models.QuizResultViewModel
+@{
+    ViewData["Title"] = "Mission Results";
+}
+
+<div class="quiz-shell">
+    <div class="hero-banner">
+        <p class="eyebrow">Mission report</p>
+        <h1>Quiz complete</h1>
+        <p>Here is your final score from the space challenge.</p>
+    </div>
+
+    <div class="score-panel">
+        <span>Score</span>
+        <strong>@Model.Score / @Model.Total</strong>
+    </div>
+
+    <p class="result-summary">@Model.Summary</p>
+
+    @foreach (var result in Model.Results)
+    {
+        var statusClass = result.IsCorrect ? "correct" : "incorrect";
+        var answerText = string.IsNullOrWhiteSpace(result.UserAnswer) ? "No answer selected" : result.UserAnswer;
+
+        <div class="result-card @statusClass">
+            <h3>@result.Question.Prompt</h3>
+            <p><strong>Your answer:</strong> @answerText</p>
+            <p>
+                @(result.IsCorrect ? "Correct!" : "Not quite — the correct answer is: " + result.Question.CorrectAnswer)
+            </p>
+            <small>@result.Question.Explanation</small>
+        </div>
+    }
+
+    <div class="submit-row">
+        <a asp-controller="Home" asp-action="Index" class="secondary-button">Try again</a>
+    </div>
+</div>

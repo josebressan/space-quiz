@@ -1,0 +1,38 @@
+﻿@model List<space_quiz.Models.QuizQuestion>
+@{
+    ViewData["Title"] = "Space Quiz";
+}
+
+<div class="quiz-shell">
+    <div class="hero-banner">
+        <p class="eyebrow">Mission briefing</p>
+        <h1>Space Quiz Challenge</h1>
+        <p>Test your cosmic knowledge and see if you are ready for the next launch window.</p>
+    </div>
+
+    <form asp-action="Submit" method="post" class="quiz-form">
+        @Html.AntiForgeryToken()
+
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var question = Model[i];
+
+            <div class="question-card">
+                <h3>@(i + 1). @question.Prompt</h3>
+                <div class="option-list">
+                    @foreach (var option in question.Choices)
+                    {
+                        <label class="option-item">
+                            <input type="radio" name="answer-@question.Id" value="@option" required />
+                            <span>@option</span>
+                        </label>
+                    }
+                </div>
+            </div>
+        }
+
+        <div class="submit-row">
+            <button type="submit" class="primary-button">Submit answers</button>
+        </div>
+    </form>
+</div>
