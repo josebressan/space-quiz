@@ -14,6 +14,10 @@ An interactive space-themed quiz experience with:
 - Final score screen with emoji reaction
 - Animated space scene (stars, comets, galaxies, parallax)
 
+## Screenshot
+
+![Space Exploration Quiz screenshot](assets/screenshot.png)
+
 ## Run locally
 
 This project can be opened directly as a static page:
